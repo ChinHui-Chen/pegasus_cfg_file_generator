@@ -59,9 +59,9 @@ def add_macro_channels(data, cfg_file_path, channel_number):
 def add_micro_channels(data, cfg_file_path, channel_number):
 
     with open(cfg_file_path, "a") as cfg_file:
-        macro_channels = data["micro_channels_added"]
+        micro_channels = data["micro_channels_added"]
 
-        for k, v in macro_channels.items():
+        for k, v in micro_channels.items():
             for i in range(int(v)):
                 current_key = k[:-1] + str(i+1)
 
@@ -69,11 +69,11 @@ def add_micro_channels(data, cfg_file_path, channel_number):
                 cfg_file.write("#Acquisition Entity creation and setup for: {}\n".format(current_key))
 
                 # Add channel to cfg file
-                for a_k, a_v in data["macros"].items():
-                    if a_k == "SetChannelNumber":
+                for a_k, a_v in data["micros"].items():
+                    if a_k == "s_SetChannelNumber":
                         cfg_file.write("""-{} "{}" {}\n""".format(a_k, current_key, channel_number))
                         channel_number += 1
-                    elif a_k == "CreateCscAcqEnt":
+                    elif a_k == "s_CreateCscAcqEnt":
                         cfg_file.write("""-{} "{}" "{}"\n""".format(a_k, current_key, a_v))
                     else:
                         cfg_file.write("""-{} "{}" {}\n""".format(a_k, current_key, a_v))
