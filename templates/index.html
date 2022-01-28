@@ -248,10 +248,27 @@
 
             <div class="col config_container" style="overflow-y: scroll; height: 40rem; overflow-x: visible">
                 <h4> Output </h4>
+                The config file will be generated using the following json data. You can edit it manually in the textarea or use "Add Channel/Undo." 
+                <br />
+                E.g. {"AHipp-1Ld1":"16","MHipp-3Ld1":"6"} AHipp-1Ld x 16 channels and MHipp-3Ld1 x 6 channels will be generated. Both Macro and Micro Channels will be generated.
+                <br />
+                <br />
+                Macro Channels
+                <br />
+                <textarea rows=8 cols=40 v-model="all_outputs.macro_channels_added_json_string"></textarea>
+                <pre>{{ all_outputs.macro_channels_added_json_string | pretty }}</pre>
 
-                <pre>
-                    {{ console_output }}
-                </pre>
+                <br />
+                Micro Channels
+                <br />
+                <textarea rows=8 cols=40 v-model="all_outputs.micro_channels_added_json_string"></textarea>
+                <pre>{{ all_outputs.micro_channels_added_json_string | pretty }}</pre>
+
+                <br />
+                <div class="col">
+                     <button v-on:click="load_car_30()">Load CAR30 channels</button>
+                </div>
+
 
             </div>
 

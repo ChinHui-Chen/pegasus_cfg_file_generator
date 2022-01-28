@@ -48,6 +48,10 @@ let vue_dashboard = new Vue({
             // channels added
             macro_channels_added: {},
             micro_channels_added: {},
+
+            // channels added (json string)
+            macro_channels_added_json_string: "{ \"Amg-1Ld1\": \"12\" }",
+            micro_channels_added_json_string: "{ \"sAHipp-3Ld1\": \"16\" }" 
         },
 
 
@@ -55,14 +59,17 @@ let vue_dashboard = new Vue({
         console_output: "",
 
         // Add channel
-        micro_channel_name: "sAHipp-3Ld1",
-        micro_n_channels: "16",
         macro_channel_name: "Amg-1Ld1",
         macro_n_channels: "12",
+        micro_channel_name: "sAHipp-3Ld1",
+        micro_n_channels: "16",
 
     },
     methods: {
         download_config_file: function () {
+
+            this.all_outputs.macro_channels_added = JSON.parse(this.all_outputs.macro_channels_added_json_string);
+            this.all_outputs.micro_channels_added = JSON.parse(this.all_outputs.micro_channels_added_json_string);
             /*
             Send an Async request to download the config file.
              */
@@ -100,17 +107,18 @@ let vue_dashboard = new Vue({
             /*
             Add a micro or macro channel
              */
-            this.all_outputs.micro_channels_added[this.micro_channel_name] = this.micro_n_channels;
-            this.output_to_console(this.micro_channel_name, this.micro_n_channels, false);
-
+            smicro = JSON.parse(this.all_outputs.micro_channels_added_json_string);
+            smicro[this.micro_channel_name] = this.micro_n_channels;
+            this.all_outputs.micro_channels_added_json_string = JSON.stringify(smicro);
         },
 
         undo_micro_channel: function () {
             /*
             Add a micro or macro channel
              */
-            delete this.all_outputs.micro_channels_added[this.micro_channel_name];
-            this.output_to_console(this.micro_channel_name, this.micro_n_channels, true);
+            smicro = JSON.parse(this.all_outputs.micro_channels_added_json_string);
+            delete smicro[this.micro_channel_name];
+            this.all_outputs.micro_channels_added_json_string = JSON.stringify(smicro);
 
         },
 
@@ -118,16 +126,20 @@ let vue_dashboard = new Vue({
             /*
             Add a macro or macro channel
              */
-            this.all_outputs.macro_channels_added[this.macro_channel_name] = this.macro_n_channels;
-            this.output_to_console(this.macro_channel_name, this.macro_n_channels, false);
+            smacro = JSON.parse(this.all_outputs.macro_channels_added_json_string);
+            smacro[this.macro_channel_name] = this.macro_n_channels;
+            this.all_outputs.macro_channels_added_json_string = JSON.stringify(smacro);
+
         },
 
         undo_macro_channel: function () {
             /*
             Add a macro or macro channel
              */
-            delete this.all_outputs.macro_channels_added[this.macro_channel_name];
-            this.output_to_console(this.macro_channel_name, this.macro_n_channels, true);
+            smacro = JSON.parse(this.all_outputs.macro_channels_added_json_string);
+            delete smacro[this.macro_channel_name];
+            this.all_outputs.macro_channels_added_json_string = JSON.stringify(smacro);
+
         },
 
         output_to_console: function (channel_name, n_channels, delete_ch) {
@@ -140,7 +152,62 @@ let vue_dashboard = new Vue({
             else {
                 this.console_output += "\n" + "Channel deleted: " + channel_name + "\n";
             }
+        },
+
+        load_car_30: function(){
+             // Load CAR30 config
+             smacro = {};
+             smicro = {};
+
+             smacro["Amg-1Ld1"] = 6 ;
+             smacro["AHipp-3Ld1"] = 6 ;
+             smacro["MHipp-5Ld1"] = 6 ;
+             smacro["SFGR-9Ld1"] = 14 ;
+             smacro["MFOG-11Ld1"] = 14 ;
+             smacro["IFCG-13Ld1"] = 6 ;
+             smacro["Amg-2Rd1"] = 6 ;
+             smacro["AHipp-4Rd1"] = 6 ;
+             smacro["MHipp-6Rd1"] = 6 ;
+             smacro["SFGR-10Rd1"] = 14 ;
+             smacro["MFOG-12Rd1"] = 14 ;
+             smacro["IFCG-14Rd1"] = 6 ;
+
+             smacro["EKG1"] = 1 ;
+             smacro["LEOG1"] = 1 ;
+             smacro["REOG1"] = 1 ;
+             smacro["EMG1"] = 1 ;
+             smacro["EMG2"] = 1 ;
+             smacro["R1"] = 1 ;
+             smacro["R2"] = 1 ;
+             smacro["R3"] = 1 ;
+             smacro["R4"] = 1 ;
+             smacro["R5"] = 1 ;
+             smacro["R6"] = 1 ;
+             smacro["R7"] = 1 ;
+             smacro["R8"] = 1 ;
+             smacro["R9"] = 1 ;
+             smacro["R10"] = 1 ;
+             smacro["Dummy-1"] = 9; //119-128
+
+             //micro
+             smicro["sAmg-1Ld1"] = 16 ;
+             smicro["sAHipp-3Ld1"] = 16 ;
+             smicro["sMHipp-5Ld1"] = 16 ;
+             smicro["sIFCG-13Ld1"] = 16 ;
+             smicro["sAmg-2Rd1"] = 16 ;
+             smicro["sAHipp-4Rd1"] = 16 ;
+             smicro["sMHipp-6Rd1"] = 16 ;
+             smicro["sIFCG-14Rd1"] = 16 ;
+
+             this.all_outputs.macro_channels_added_json_string = JSON.stringify(smacro);
+             this.all_outputs.micro_channels_added_json_string = JSON.stringify(smicro);
+           
         }
+    },
+    filters: {
+        pretty: function(value) {
+              return JSON.stringify(JSON.parse(value), null, 2);
+            }
     }
 
 });
