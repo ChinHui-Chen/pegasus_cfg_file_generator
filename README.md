@@ -28,3 +28,24 @@ name "Amg-1LD1", "Amg-1LD2", ... ,"Amg-1LD10".
 4. Add all the desired channels, use the undo button if needed. (***Undo only removes the last added channel. If want an earlier channel to me modified then you are out of luck, just start again.***)
 5. Hit Download to get the cfg file.
 6. Modify the data storage path to the desired value after you download the file.
+
+## Release Note
+
+* v2.1
+  * change default parameters to better fit user requirements
+  * fix bug: used wrong macro channels
+  * add edit textarea
+
+
+## Deployment
+
+* in ch's cloud
+
+`chmod 777 pegasus_cfg_file_generator`
+
+`git pull`
+
+`systemctl restart apache2`
+
+`chmod 775 pegasus_cfg_file_generator`
+
