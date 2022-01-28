@@ -31,13 +31,18 @@ def generate_config_file(data):
 
 
 def add_macro_channels(data, cfg_file_path, channel_number):
+    
+    ignore_list = [ "EKG1","LEOG1","REOG1","EMG1","EMG2","R1","R2","R3","R4","R5","R6","R7","R8","R9","R10","R11","R12" ]
 
     with open(cfg_file_path, "a") as cfg_file:
         macro_channels = data["macro_channels_added"]
 
         for k, v in macro_channels.items():
             for i in range(int(v)):
-                current_key = k[:-1] + str(i+1)
+                if k in ignore_list:
+                    current_key = k
+                else:
+                    current_key = k[:-1] + str(i+1)
 
                 # Add cfg comment
                 cfg_file.write("#Acquisition Entity creation and setup for: {}\n".format(current_key))
