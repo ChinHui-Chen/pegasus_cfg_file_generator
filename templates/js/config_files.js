@@ -51,7 +51,7 @@ let vue_dashboard = new Vue({
 
             // channels added (json string)
             macro_channels_added_json_string: "{ \"Amg-1Ld1\": \"12\" }",
-            micro_channels_added_json_string: "{ \"sAHipp-3Ld1\": \"16\" }" 
+            micro_channels_added_json_string: "{ \"sAmg-1Ld1\": \"16\" }" 
         },
 
 
@@ -59,7 +59,7 @@ let vue_dashboard = new Vue({
         console_output: "",
 
         // Add channel
-        macro_channel_name: "Amg-1Ld1",
+        macro_channel_name: "AHipp-3Ld",
         macro_n_channels: "12",
         micro_channel_name: "sAHipp-3Ld1",
         micro_n_channels: "16",
@@ -152,6 +152,25 @@ let vue_dashboard = new Vue({
             else {
                 this.console_output += "\n" + "Channel deleted: " + channel_name + "\n";
             }
+        },
+        add_ekg: function(){
+            smacro = JSON.parse(this.all_outputs.macro_channels_added_json_string);
+            smacro["EKG1"] = 1 ;
+            smacro["LEOG1"] = 1 ;
+            smacro["REOG1"] = 1 ;
+            smacro["EMG1"] = 1 ;
+            smacro["EMG2"] = 1 ;
+            smacro["R1"] = 1 ;
+            smacro["R2"] = 1 ;
+            smacro["R3"] = 1 ;
+            smacro["R4"] = 1 ;
+            smacro["R5"] = 1 ;
+            smacro["R6"] = 1 ;
+            smacro["R7"] = 1 ;
+            smacro["R8"] = 1 ;
+            smacro["R9"] = 1 ;
+            smacro["R10"] = 1 ;
+            this.all_outputs.macro_channels_added_json_string = JSON.stringify(smacro);
         },
 
         load_car_30: function(){
