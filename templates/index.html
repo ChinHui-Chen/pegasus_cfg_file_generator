@@ -265,9 +265,10 @@
                 <pre>{{ all_outputs.micro_channels_added_json_string | pretty }}</pre>
 
                 <br />
-                <div class="col">
-                     <button v-on:click="load_car_30()">Load CAR30 channels</button>
-                </div>
+                Here are some preload configs. If you need more, please let me know.
+                <br />
+                <button v-on:click="load_car_30()">Load CAR30 Channels</button>
+
 
 
             </div>
@@ -464,12 +465,17 @@
         <div class="row config_container">
             <button v-on:click="download_config_file()"> Download </button>
         </div>
+        <div>
+            <button v-on:click="count_total()">Count Channels</button>
+             Macro: {{ all_outputs.macro_total }} Micro: {{ all_outputs.micro_total }} Total: {{ all_outputs.all_total }}
+        </div>
 
     </div>
     <!-- End of dashboard -->
 
     <div>
         <center>source code: https://github.com/ChinHui-Chen/pegasus_cfg_file_generator</center>
+        <center>contact: chinhui@vt.edu</center>
         <center>Neural Dynamics and Neural Engineering Lab, Virginia Tech</center>
     </div>
 

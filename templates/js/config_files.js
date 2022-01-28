@@ -51,7 +51,12 @@ let vue_dashboard = new Vue({
 
             // channels added (json string)
             macro_channels_added_json_string: "{ \"Amg-1Ld1\": \"12\" }",
-            micro_channels_added_json_string: "{ \"sAmg-1Ld1\": \"16\" }" 
+            micro_channels_added_json_string: "{ \"sAmg-1Ld1\": \"16\" }",
+
+            macro_total: 0,
+            micro_total: 0,
+            all_total: 0
+
         },
 
 
@@ -221,6 +226,27 @@ let vue_dashboard = new Vue({
              this.all_outputs.macro_channels_added_json_string = JSON.stringify(smacro);
              this.all_outputs.micro_channels_added_json_string = JSON.stringify(smicro);
            
+        },
+
+        count_total: function(){
+           smacro = JSON.parse(this.all_outputs.macro_channels_added_json_string);
+           matotal = 0
+           for (var key in smacro){
+               if (smacro.hasOwnProperty(key)) {
+                  matotal += parseInt( smacro[key] );
+               }
+           }
+           smicro = JSON.parse(this.all_outputs.micro_channels_added_json_string);
+           mitotal = 0
+           for (var key in smicro){
+               if (smicro.hasOwnProperty(key)) {
+                  mitotal += parseInt( smicro[key] );
+               }
+           }
+           this.all_outputs.macro_total = matotal;
+           this.all_outputs.micro_total = mitotal;
+           this.all_outputs.all_total = matotal + mitotal;
+
         }
     },
     filters: {
