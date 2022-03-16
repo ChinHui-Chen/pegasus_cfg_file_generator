@@ -75,13 +75,13 @@ def add_micro_channels(data, cfg_file_path, channel_number):
 
                 # Add channel to cfg file
                 for a_k, a_v in data["micros"].items():
-                    if a_k == "s_SetChannelNumber":
-                        cfg_file.write("""-{} "{}" {}\n""".format(a_k, current_key, channel_number))
+                    if a_k == "s_SetChannelNumber": 
+                        cfg_file.write("""-{} "{}" {}\n""".format("SetChannelNumber", current_key, channel_number))
                         channel_number += 1
-                    elif a_k == "s_CreateCscAcqEnt":
-                        cfg_file.write("""-{} "{}" "{}"\n""".format(a_k, current_key, a_v))
+                    elif a_k == "s_CreateCscAcqEnt": 
+                        cfg_file.write("""-{} "{}" "{}"\n""".format("CreateCscAcqEnt", current_key, a_v))
                     else:
-                        cfg_file.write("""-{} "{}" {}\n""".format(a_k, current_key, a_v))
+                        cfg_file.write("""-{} "{}" {}\n""".format(a_k.replace('s_',''), current_key, a_v))
 
                 cfg_file.write("""\n""")
         return channel_number
