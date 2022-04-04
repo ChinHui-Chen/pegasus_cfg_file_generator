@@ -14,6 +14,9 @@ def generate_config_file(data):
 
         template_content = template_file.read()
 
+        # replace -SetDataDirectory
+        template_content = template_content.replace( "D:\\PegasusData\\CAR03\\" ,data["set_data_dir"])
+
         with open(cfg_file_path, "w") as cfg_file:
             cfg_file.write(template_content)
 

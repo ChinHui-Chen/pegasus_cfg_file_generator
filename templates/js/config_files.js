@@ -5,6 +5,7 @@ let vue_dashboard = new Vue({
         all_outputs: {
             // file name
             file_name: "default",
+            set_data_dir: "D:\\PegasusData\\CAR03\\",
 
             // Micros
             micros: {
